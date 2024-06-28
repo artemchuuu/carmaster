@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CarMaster\Entity\Enum;
 
-enum Brand : string
+enum Brand: string
 {
     case BMW = 'BMW';
 

@@ -22,8 +22,12 @@ final class EmployeeController extends AbstractController
     }
 
     #[Route('/employee/{firstName}/{email}', name: 'app_employee_create')]
-    public function  create(string $firstName, string $email, EntityManagerInterface $entityManager, EmployeeManager $employeeManager): Response
-    {
+    public function create(
+        string $firstName,
+        string $email,
+        EntityManagerInterface $entityManager,
+        EmployeeManager $employeeManager
+    ): Response {
         $company = $entityManager->getRepository(Company::class)->findOneBy([
             'name' => $firstName,
             'email' => $email

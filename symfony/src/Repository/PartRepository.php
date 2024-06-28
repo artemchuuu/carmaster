@@ -20,7 +20,7 @@ final class PartRepository extends ServiceEntityRepository
 
     public function findPage(int $page = 1)
     {
-        return  $this->createQueryBuilder('b')
+        return $this->createQueryBuilder('b')
             ->orderBy('b.id')
             ->getQuery()
             ->setFirstResult(self::PARTS_PER_PAGE * $page - self::PARTS_PER_PAGE)

@@ -28,6 +28,13 @@ doctrine:
                 dir: '%kernel.project_dir%/src/CarMaster/Entity'
                 prefix: 'CarMaster\Entity'
                 alias: CarMaster
+            App:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+
         controller_resolver:
             auto_mapping: true
 

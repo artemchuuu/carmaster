@@ -15,8 +15,11 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ServiceOrderController extends AbstractController
 {
     #[Route('/service/{id}/total-cost', name: 'app_service_order_total_cost')]
-    public function totalCost($id, ServiceCostCalculator $serviceCostCalculator, EntityManagerInterface $entityManager): JsonResponse
-    {
+    public function totalCost(
+        $id,
+        ServiceCostCalculator $serviceCostCalculator,
+        EntityManagerInterface $entityManager
+    ): JsonResponse {
         $serviceOrderRepository = $entityManager->getRepository(ServiceOrder::class);
 
         $serviceOrder = $serviceOrderRepository->find($id);
@@ -35,8 +38,14 @@ final class ServiceOrderController extends AbstractController
     }
 
     #[Route('/service-order/create/{serviceNumber}/{carVinCode}/{partId}/{workHours}', name: 'app_service_order_create')]
-    public function create(int $serviceNumber, string $carVinCode, int $partId, int $workHours, EntityManagerInterface $entityManager, ServiceOrderManager $serviceOrderManager): JsonResponse
-    {
+    public function create(
+        int $serviceNumber,
+        string $carVinCode,
+        int $partId,
+        int $workHours,
+        EntityManagerInterface $entityManager,
+        ServiceOrderManager $serviceOrderManager
+    ): JsonResponse {
         $car = $entityManager->getRepository(Car::class)->findOneBy([
             'vinCode' => $carVinCode,
         ]);
@@ -45,6 +54,8 @@ final class ServiceOrderController extends AbstractController
             'id' => $partId,
         ]);
 
-        return new JsonResponse($serviceOrderManager->createOrder($serviceNumber, $car, $part, $workHours)->getFullInfo());
+        return new JsonResponse(
+            $serviceOrderManager->createOrder($serviceNumber, $car, $part, $workHours)->getFullInfo()
+        );
     }
 }

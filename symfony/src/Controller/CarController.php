@@ -12,8 +12,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CarController extends AbstractController
 {
     #[Route('/car/{name}/{surname}', name: 'app_car_create')]
-    public function create(string $name, string $surname, EntityManagerInterface $entityManager, CarManager $carManager): JsonResponse
-    {
+    public function create(
+        string $name,
+        string $surname,
+        EntityManagerInterface $entityManager,
+        CarManager $carManager
+    ): JsonResponse {
         $client = $entityManager->getRepository(Client::class)->findOneBy([
             'name' => $name,
             'surname' => $surname,
